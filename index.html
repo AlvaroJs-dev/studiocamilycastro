@@ -232,6 +232,7 @@
 
     <ul id="listaGastos"></ul>
     <div class="total" id="lucro">Lucro do dia: R$ 0,00</div>
+    <div class="total" id="totalMes">Total do mês: R$ 0,00</div>
   </div>
 
 </div>
@@ -342,10 +343,24 @@
 
   function atualizar() {
     const d = filtroData.value;
-    const total = agendamentos.filter(a => a.data === d).reduce((s,a)=>s+a.valor,0);
-    const g = gastos.filter(x => x.data === d).reduce((s,x)=>s+x.valor,0);
-    totalReceber.innerText = `Total a receber: R$ ${total.toFixed(2)}`;
-    lucro.innerText = `Lucro do dia: R$ ${(total-g).toFixed(2)}`;
+    if(!d) return;
+
+    const anoMes = d.slice(0,7); // YYYY-MM
+
+    const totalDia = agendamentos.filter(a => a.data === d)
+      .reduce((s,a)=>s+a.valor,0);
+
+    const gastosDia = gastos.filter(x => x.data === d)
+      .reduce((s,x)=>s+x.valor,0);
+
+    const totalMes = agendamentos.filter(a => a.data.startsWith(anoMes))
+      .reduce((s,a)=>s+a.valor,0);
+
+    totalReceber.innerText = `Total a receber: R$ ${totalDia.toFixed(2)}`;
+    lucro.innerText = `Lucro do dia: R$ ${(totalDia-gastosDia).toFixed(2)}`;
+    totalMesEl = document.getElementById('totalMes');
+    totalMesEl.innerText = `Total do mês: R$ ${totalMes.toFixed(2)}`;
+
     listaGastos.innerHTML='';
     gastos.filter(x=>x.data===d).forEach(x=>{
       const li=document.createElement('li');
