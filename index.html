@@ -1,3 +1,12 @@
+# Studio Camily Castro — Sistema de Agendamento (com Abas)
+
+Versão atualizada com **abas**, layout **100% roxo**, moderno, delicado e responsivo.
+
+---
+
+## 📄 Código Completo (HTML + CSS + JS)
+
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -364,35 +373,11 @@
     totalMesEl.innerText = `Total do mês: R$ ${totalMes.toFixed(2)}`;
 
     listaGastos.innerHTML='';
-    gastos
-      .map((x,index)=>({...x,index}))
-      .filter(x=>x.data===d)
-      .forEach(x=>{
-        const li=document.createElement('li');
-        li.innerHTML = `${x.desc} - R$ ${x.valor.toFixed(2)} <br><button onclick="excluirGasto(${x.index})">Excluir</button>`;
-        listaGastos.appendChild(li);
-      });
-  }
-
-  function excluirGasto(index){
-    if(!confirm('Deseja excluir este gasto?')) return;
-    gastos.splice(index,1);
-    localStorage.setItem('ga', JSON.stringify(gastos));
-    atualizar();
-  }`;
-    lucro.innerText = `Lucro do dia: R$ ${(totalDia-gastosDia).toFixed(2)}`;
-    totalMesEl = document.getElementById('totalMes');
-    totalMesEl.innerText = `Total do mês: R$ ${totalMes.toFixed(2)}`;
-
-    listaGastos.innerHTML='';
-    gastos
-      .map((x,index)=>({...x,index}))
-      .filter(x=>x.data===d)
-      .forEach(x=>{
-        const li=document.createElement('li');
-        li.innerHTML = `${x.desc} - R$ ${x.valor.toFixed(2)} <br><button onclick="excluirGasto(${x.index})">Excluir</button>`;
-        listaGastos.appendChild(li);
-      });
+    gastos.filter(x=>x.data===d).forEach(x=>{
+      const li=document.createElement('li');
+      li.innerText = `${x.desc} - R$ ${x.valor.toFixed(2)}`;
+      listaGastos.appendChild(li);
+    });
   }
 
   renderCalendarioMensal();
