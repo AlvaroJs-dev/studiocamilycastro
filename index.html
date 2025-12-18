@@ -1,0 +1,362 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio Camily Castro</title>
+  <style>
+    :root {
+      --preto: #0b0b0b;
+      --preto-2: #161616;
+      --branco: #ffffff;
+      --cinza: #b5b5b5;
+      --cinza-escuro: #2a2a2a;
+      --sombra: 0 12px 30px rgba(0,0,0,0.6);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, var(--preto), var(--preto-2));
+      color: var(--branco);
+    }
+
+    header {
+      background: #000;
+      color: var(--branco);
+      padding: 40px 20px;
+      text-align: center;
+      border-bottom-left-radius: 28px;
+      border-bottom-right-radius: 28px;
+      box-shadow: var(--sombra);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.3rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .tabs {
+      max-width: 1000px;
+      margin: -24px auto 30px;
+      background: var(--preto-2);
+      border-radius: 20px;
+      display: flex;
+      overflow: hidden;
+      box-shadow: var(--sombra);
+      border: 1px solid var(--cinza-escuro);
+    }
+
+    .tabs button {
+      flex: 1;
+      padding: 16px;
+      border: none;
+      background: transparent;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--cinza);
+      transition: 0.3s;
+    }
+
+    .tabs button.active {
+      background: var(--branco);
+      color: #000;
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 10px 20px 40px;
+    }
+
+    .card {
+      background: var(--preto-2);
+      border-radius: 22px;
+      padding: 25px;
+      box-shadow: var(--sombra);
+      display: none;
+      animation: fade 0.35s ease;
+      border: 1px solid var(--cinza-escuro);
+    }
+
+    .card.active { display: block; }
+
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      color: var(--branco);
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+
+    label {
+      display: block;
+      margin-top: 14px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--cinza);
+    }
+
+    input, textarea {
+      width: 100%;
+      margin-top: 6px;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid var(--cinza-escuro);
+      font-size: 0.9rem;
+      background: #0f0f0f;
+      color: var(--branco);
+    }
+
+    textarea { resize: none; }
+
+    button {
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--branco);
+      background: transparent;
+      color: var(--branco);
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: var(--branco);
+      color: #000;
+    }
+
+    #calendarioGrid div {
+      background: #0f0f0f;
+      padding: 14px;
+      border-radius: 14px;
+      text-align: center;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.25s;
+      color: var(--cinza);
+      border: 1px solid var(--cinza-escuro);
+    }
+
+    #calendarioGrid div:hover {
+      background: var(--branco);
+      color: #000;
+    }
+
+    ul { list-style: none; padding: 0; margin-top: 10px; }
+
+    li {
+      background: #0f0f0f;
+      padding: 12px;
+      border-radius: 14px;
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+      color: var(--branco);
+      border: 1px solid var(--cinza-escuro);
+    }
+
+    .total {
+      margin-top: 18px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--branco);
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.8rem; }
+      .tabs button { font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Studio Camily Castro</h1>
+</header>
+
+<div class="tabs">
+  <button class="active" onclick="abrirAba('agendamento', this)">Agendamentos</button>
+  <button onclick="abrirAba('calendario', this)">Calendário</button>
+  <button onclick="abrirAba('financeiro', this)">Financeiro</button>
+</div>
+
+<div class="container">
+
+  <div id="agendamento" class="card active">
+    <h2>📅 Novo Agendamento</h2>
+    <label>Cliente</label><input id="cliente">
+    <label>Procedimento</label><input id="procedimento">
+    <label>Data</label><input type="date" id="data">
+    <label>Hora</label><input type="time" id="hora">
+    <label>Valor (R$)</label><input type="number" id="valor">
+    <label>Observações</label><textarea id="obs"></textarea>
+    <button onclick="addAgendamento()">Salvar Agendamento</button>
+  </div>
+
+  <div id="calendario" class="card">
+  <h2>📆 Calendário de Agendamentos</h2>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
+    <button onclick="mesAnterior()">◀</button>
+    <strong id="mesAno"></strong>
+    <button onclick="mesSeguinte()">▶</button>
+  </div>
+  <div id="calendarioGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;"></div>
+  <h3 style="margin-top:20px">Agendamentos do dia</h3>
+  <ul id="listaCalendario"></ul>
+</div>
+
+<div id="financeiro" class="card">
+    <h2>💜 Financeiro</h2>
+    <label>Data</label><input type="date" id="filtroData" onchange="atualizar()">
+    <div class="total" id="totalReceber">Total a receber: R$ 0,00</div>
+
+    <h3>Gastos</h3>
+    <input id="descGasto" placeholder="Descrição do gasto">
+    <input type="number" id="valorGasto" placeholder="Valor">
+    <button onclick="addGasto()">Adicionar gasto</button>
+
+    <ul id="listaGastos"></ul>
+    <div class="total" id="lucro">Lucro do dia: R$ 0,00</div>
+  </div>
+
+</div>
+
+<script>
+  let agendamentos = JSON.parse(localStorage.getItem('ag')) || [];
+  let gastos = JSON.parse(localStorage.getItem('ga')) || [];
+
+  let dataAtual = new Date();
+
+  function abrirAba(id, btn) {
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // sempre redesenha o calendário ao abrir a aba
+    if (id === 'calendario') {
+      renderCalendarioMensal();
+    }
+  }
+
+  function addAgendamento() {
+    agendamentos.push({
+      cliente: cliente.value,
+      procedimento: procedimento.value,
+      data: data.value,
+      hora: hora.value,
+      valor: +valor.value,
+      obs: obs.value
+    });
+    localStorage.setItem('ag', JSON.stringify(agendamentos));
+    alert('Agendamento salvo!');
+    renderCalendarioMensal();
+  }
+
+  function mesAnterior(){ dataAtual.setMonth(dataAtual.getMonth()-1); renderCalendarioMensal(); }
+  function mesSeguinte(){ dataAtual.setMonth(dataAtual.getMonth()+1); renderCalendarioMensal(); }
+
+  function renderCalendarioMensal(){
+    // garante leitura atualizada do storage
+    agendamentos = JSON.parse(localStorage.getItem('ag')) || [];
+
+
+    const grid = document.getElementById('calendarioGrid');
+    const titulo = document.getElementById('mesAno');
+    grid.innerHTML = '';
+
+    const ano = dataAtual.getFullYear();
+    const mes = dataAtual.getMonth();
+
+    const nomeMes = dataAtual.toLocaleDateString('pt-BR', { month: 'long' });
+    const mesFormatado = nomeMes.charAt(0).toUpperCase() + nomeMes.slice(1);
+    titulo.innerText = `${mesFormatado} • ${ano}`;
+
+    const primeiroDia = new Date(ano, mes, 1).getDay();
+    const totalDias = new Date(ano, mes+1, 0).getDate();
+
+    for(let i=0;i<primeiroDia;i++) grid.innerHTML += '<div></div>';
+
+    for(let dia=1;dia<=totalDias;dia++){
+      const dataStr = `${ano}-${String(mes+1).padStart(2,'0')}-${String(dia).padStart(2,'0')}`;
+      const temAgenda = agendamentos.some(a=>a.data===dataStr);
+      const div = document.createElement('div');
+      div.style.padding='10px';
+      div.style.borderRadius='10px';
+      div.style.cursor='pointer';
+      div.style.background = temAgenda ? '#d8c8ff' : '#f3edff';
+      div.innerText = dia;
+      div.onclick = ()=>mostrarDia(dataStr);
+      grid.appendChild(div);
+    }
+  }
+
+  function mostrarDia(data){
+    listaCalendario.innerHTML='';
+
+    agendamentos
+      .map((a,index)=>({...a,index}))
+      .filter(a=>a.data===data)
+      .sort((a,b)=>a.hora.localeCompare(b.hora))
+      .forEach(a=>{
+        const li=document.createElement('li');
+        li.innerHTML = `
+          <strong>${a.hora}</strong> - ${a.cliente}<br>
+          <small>${a.procedimento}</small><br>
+          <small><em>${a.obs || 'Sem observações'}</em></small><br>
+          <strong>R$ ${a.valor.toFixed(2)}</strong><br>
+          <button onclick="excluirAgendamento(${a.index})">Excluir</button>
+        `;
+        listaCalendario.appendChild(li);
+      });
+  }
+
+  function excluirAgendamento(index){
+    if(!confirm('Deseja excluir este agendamento?')) return;
+    agendamentos.splice(index,1);
+    localStorage.setItem('ag', JSON.stringify(agendamentos));
+    listaCalendario.innerHTML='';
+    renderCalendarioMensal();
+  }
+
+  function addGasto() {
+    gastos.push({ data: filtroData.value, valor: +valorGasto.value, desc: descGasto.value });
+    localStorage.setItem('ga', JSON.stringify(gastos));
+    atualizar();
+  }
+
+  function atualizar() {
+    const d = filtroData.value;
+    const total = agendamentos.filter(a => a.data === d).reduce((s,a)=>s+a.valor,0);
+    const g = gastos.filter(x => x.data === d).reduce((s,x)=>s+x.valor,0);
+    totalReceber.innerText = `Total a receber: R$ ${total.toFixed(2)}`;
+    lucro.innerText = `Lucro do dia: R$ ${(total-g).toFixed(2)}`;
+    listaGastos.innerHTML='';
+    gastos.filter(x=>x.data===d).forEach(x=>{
+      const li=document.createElement('li');
+      li.innerText = `${x.desc} - R$ ${x.valor.toFixed(2)}`;
+      listaGastos.appendChild(li);
+    });
+  }
+
+  renderCalendarioMensal();
+</script>
+
+</body>
+</html>
+```

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camily Castro Nail Design</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Camily Castro Nail Design</h1>
+
+    <nav>
+        <a onclick="abrirAba('agendar')">Agendar</a>
+        <a onclick="abrirAba('agendamentos')">Agendamentos</a>
+    </nav>
+</header>
+
+<section id="agendar" class="aba ativa fade">
+    <h2>Agendar Atendimento</h2>
+
+    <form id="formAgendamento">
+        <label>Nome:</label>
+        <input type="text" id="nome" placeholder="Seu nome" required>
+
+        <label>Serviço:</label>
+        <select id="servico" required>
+            <option value="">Selecione</option>
+            <option value="Alongamento em Fibra">Alongamento em Fibra</option>
+            <option value="Gel na Tip">Gel na Tip</option>
+            <option value="Banho de Gel">Banho de Gel</option>
+            <option value="Esmaltação em Gel">Esmaltação em Gel</option>
+            <option value="Blindagem">Blindagem</option>
+            <option value="Manutenção de Alongamento">Manutenção</option>
+            <option value="Spa das Mãos">Spa das Mãos</option>
+            <option value="Design de Cílios – Fio a Fio">Cílios – Fio a Fio</option>
+            <option value="Design de Cílios – Volume Russo">Cílios – Volume Russo</option>
+        </select>
+
+        <label>Preço (R$):</label>
+        <input type="number" id="preco" placeholder="0.00" step="0.01" min="0">
+
+        <div class="row">
+            <div class="col">
+                <label>Data:</label>
+                <input type="date" id="data" required>
+            </div>
+            <div class="col">
+                <label>Horário:</label>
+                <input type="time" id="hora" required>
+            </div>
+        </div>
+
+        <button type="submit">Confirmar Agendamento</button>
+    </form>
+</section>
+
+<section id="agendamentos" class="aba fade">
+    <h2>Agendamentos</h2>
+
+    <div id="calendario"></div>
+
+    <h3>Lista de Agendamentos</h3>
+    <ul id="listaAgendamentos"></ul>
+
+    <h3>Resumo de Procedimentos</h3>
+    <div id="resumoProcedimentos" class="resumo"></div>
+</section>
+
+<script src="script.js"></script>
+
+</body>
+</html>
