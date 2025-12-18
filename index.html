@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -7,12 +6,15 @@
   <title>Studio Camily Castro</title>
   <style>
     :root {
-      --preto: #0b0b0b;
-      --preto-2: #161616;
-      --branco: #ffffff;
-      --cinza: #b5b5b5;
-      --cinza-escuro: #2a2a2a;
-      --sombra: 0 12px 30px rgba(0,0,0,0.6);
+      --rosa-principal: #f2a1c7;
+      --rosa-claro: #fde6f0;
+      --rosa-escuro: #c96b9c;
+      --fundo: #fff5fa;
+      --fundo-card: #ffffff;
+      --texto: #3a2a33;
+      --cinza: #8a7a83;
+      --borda: #f3c6dc;
+      --sombra: 0 12px 30px rgba(201,107,156,0.25);
     }
 
     * {
@@ -22,12 +24,12 @@
 
     body {
       margin: 0;
-      background: linear-gradient(180deg, var(--preto), var(--preto-2));
+      background: linear-gradient(180deg, var(--rosa-claro), var(--fundo));
       color: var(--branco);
     }
 
     header {
-      background: #000;
+      background: var(--rosa-principal);
       color: var(--branco);
       padding: 40px 20px;
       text-align: center;
@@ -46,12 +48,12 @@
     .tabs {
       max-width: 1000px;
       margin: -24px auto 30px;
-      background: var(--preto-2);
+      background: var(--fundo-card);
       border-radius: 20px;
       display: flex;
       overflow: hidden;
       box-shadow: var(--sombra);
-      border: 1px solid var(--cinza-escuro);
+      border: 1px solid var(--borda);
     }
 
     .tabs button {
@@ -79,13 +81,13 @@
     }
 
     .card {
-      background: var(--preto-2);
+      background: var(--fundo-card);
       border-radius: 22px;
       padding: 25px;
       box-shadow: var(--sombra);
       display: none;
       animation: fade 0.35s ease;
-      border: 1px solid var(--cinza-escuro);
+      border: 1px solid var(--borda);
     }
 
     .card.active { display: block; }
@@ -114,9 +116,9 @@
       margin-top: 6px;
       padding: 12px;
       border-radius: 14px;
-      border: 1px solid var(--cinza-escuro);
+      border: 1px solid var(--borda);
       font-size: 0.9rem;
-      background: #0f0f0f;
+      background: var(--rosa-claro);
       color: var(--branco);
     }
 
@@ -137,12 +139,12 @@
     }
 
     button:hover {
-      background: var(--branco);
-      color: #000;
+      background: var(--rosa-principal);
+      color: #fff;
     }
 
     #calendarioGrid div {
-      background: #0f0f0f;
+      background: var(--rosa-claro);
       padding: 14px;
       border-radius: 14px;
       text-align: center;
@@ -150,24 +152,24 @@
       cursor: pointer;
       transition: 0.25s;
       color: var(--cinza);
-      border: 1px solid var(--cinza-escuro);
+      border: 1px solid var(--borda);
     }
 
     #calendarioGrid div:hover {
-      background: var(--branco);
-      color: #000;
+      background: var(--rosa-principal);
+      color: #fff;
     }
 
     ul { list-style: none; padding: 0; margin-top: 10px; }
 
     li {
-      background: #0f0f0f;
+      background: var(--rosa-claro);
       padding: 12px;
       border-radius: 14px;
       margin-bottom: 8px;
       font-size: 0.85rem;
       color: var(--branco);
-      border: 1px solid var(--cinza-escuro);
+      border: 1px solid var(--borda);
     }
 
     .total {
